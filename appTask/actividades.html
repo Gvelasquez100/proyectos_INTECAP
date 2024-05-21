@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+    <title>Admin Dashboard</title>
+	<!-- BOOTSTRAP STYLES-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+     <!-- FONTAWESOME STYLES-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+        <!-- CUSTOM STYLES-->
+    <link href="assets/css/custom.css" rel="stylesheet" />
+     <!-- GOOGLE FONTS-->
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<body>
+     
+           
+          
+    <div id="wrapper">
+
+         <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="adjust-nav">
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="login.html">cerrar sesion</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- nav lateral  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li class="text-center user-image-back">
+                        <img src="assets/img/find_user.png" class="img-responsive" />
+                    </li>
+                    <!--nav opciones-->
+                    <li>
+                        <a href="admin.html"><i class="fa fa-desktop "></i>Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="user.html"><i class="fa fa-user "></i>Usuarios</a>
+                    </li>
+
+                    <li>
+                        <a href="horarios.html"><i class="fa fa-table "></i>Horarios</a>
+                    </li>
+                    
+                    <li>
+                        <a href="#"><i class="fa fa-list "></i>Actividades</a>
+                    </li>  
+                </ul>
+            </div>
+        </nav>
+
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                     <h2>Tablero de Actividades</h2>   
+                    </div>
+                </div> 
+
+                <div class="row">
+                        <div class="col-md-3 col-sm-3 col-xs-6">
+                            <h5>Crear Actividad</h5>    
+                        </div> 
+                        <hr />
+                        <div id="" class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Nombre:</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre"  maxlength="60" placeholder="Nombre y apellido" required v-model="nombre_usuario"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Correo:</label>
+                                    <input type="email" class="form-control" id="email" name="email"  maxlength="50" placeholder="nombre@apptask.com" required v-model="correo_usuario"/>
+                                    <span class="input-group-text" id="basic-addon2">@apptask.com</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Contraseña:</label>
+                                    <input type="password" class="form-control" id="password" name="password" maxlength="20" placeholder="contraseña" required v-model="pass_usuario"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="rolList" class="form-label">Rol:</label>
+                                    <select class="form-select" id="roList" required v-model="id_rol">
+                                      <option selected>Selecciona un rol</option>
+                                      <option value="1">Administrador</option>
+                                      <option value="2">Empleado</option>
+                                    </select>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="estadoList" class="form-label">Estado:</label>
+                                    <select class="form-select" id="roList" required v-model="id_estado">
+                                      <option selected>Selecciona un estado</option>
+                                      <option value="1">Disponible</option>
+                                      <option value="2">No Disponible</option>
+                                    </select>
+                                  </div>
+                                  <div class="form-group">
+                                    <button value="Crear" @click="addUsuario();" class="btn-login text-center">Crear Actividad</button>
+                                  </div>
+                            </div> 
+
+                              <!---->
+                            
+                            <div class="container-fluid">  
+                                    
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Id</th>
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Correo</th>
+                                                <th scope="col">Contarseña</th>
+                                                <th scope="col">Rol</th>
+                                                <th scope="col">Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="(usuarios, index) in usuarios">
+                                                <td> {{ usuarios.id_usuario }} </td>
+                                                <td> {{ usuarios.nombre_usuario }} </td>
+                                                <td> {{ usuarios.correo_usuario  }} </td>
+                                                <td> {{ usuarios.pass_usuario  }} </td>
+                                                <td> {{ usuarios.id_rol  }} </td>
+                                                <td> {{ usuarios.id_estado  }} </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                         
+                        </div>
+
+                       
+                </div> 
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#',
+            data: {
+                usuarios: [],
+                nombre_usuario: '',
+                correo_usuario: '',
+                pass_usuario: '',
+                id_rol: '',
+                id_estado: ''
+            },
+            methods: {
+                obtenerUsuario: function() {
+                    axios.post('', {
+                        request: 1
+                    })
+                    .then(function(response) {
+                        app.usuarios = response.data;
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    });
+                }, 
+
+                addUsuario: function() {
+                    if(this.nombre_usuario != '' && this.correo_usuario !='' && this.pass_usuario != '' && this.id_rol !='' && this.id_estado !='') {
+                        axios.post('', {
+                            request: 2,
+                            nombre_usuario: this.nombre_usuario,
+                            correo_usuario: this.correo_usuario,
+                            pass_usuario: this.pass_usuario,
+                            id_rol: this.id_rol,
+                            id_estado: this.id_estado
+                        })
+                        .then(function(response) {
+                            app.obtenerUsuario();
+                            
+                            app.id_usuario = '';
+                            app.nombre_usuario = '';
+                            app.correo_usuario = '';
+                            app.pass_usuario = '';
+                            app.id_rol = '';
+                            app.id_estado = '';
+                            
+                            alert(response.data);
+                        })
+                        .catch(function () {
+                            console.log(error);
+                        });
+                    } else {
+                        alert("Llenar los campos.");
+                    }
+                },
+//editar
+                editUsuario: function(index, id_usuario) {
+                    var nombre_usuario = this.nombre_usuario;
+                    var correo_usuario = this.correo_usuario;
+                    var pass_usuario = this.pass_usuario;
+                    var id_rol = this.id_rol;
+                    var id_estado = this.id_estado;
+
+                    if(this.nombre_usuario != '' && this.correo_usuario !='' && this.pass_usuario != '' && this.id_rol !='' && this.id_estado !='') {
+                        axios.post('', {
+                            request: 3,
+                            id_usuario: id_usuario,
+                            nombre_usuario: nombre_usuario,
+                            correo_usuario: correo_usuario,
+                            pass_usuario: pass_usuario,
+                            id_rol: id_rol,
+                            id_estado: id_estado
+                        })
+                        .then(function(response) {
+                            app.obtenerUsuario();
+                            app.nombre_usuario = '';
+                            app.correo_usuario = '';
+                            app.pass_usuario = '';
+                            app.id_rol = '';
+                            app.id_estado = '';
+                            alert(response.data);
+                        })
+                        .catch(function(error) {
+                            console.log(error);
+                        });
+                    }
+                },
+
+                deleteUsuario: function(index, id_usuario) {
+                    axios.post('', {
+                        request: 4,
+                        id_usuario: id_usuario
+                    })
+                    .then(function(response) {
+                        app.usuarios.splice(index, 1);
+                        alert(response.data);
+                    })
+                    .catch( function(error) {
+                        console.log(error);
+                    });
+                }
+            },
+
+            created: function() {
+                this.obtenerUsuario();
+            }
+        })
+    </script>
+
+    <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="assets/js/jquery-1.10.2.js"></script>
+      <!-- BOOTSTRAP SCRIPTS -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
+      <!-- CUSTOM SCRIPTS -->
+    <script src="assets/js/custom.js"></script>
+      
+</body>
+</html>
