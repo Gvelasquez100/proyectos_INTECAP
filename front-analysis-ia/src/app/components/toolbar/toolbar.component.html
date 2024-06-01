@@ -1,0 +1,120 @@
+<mat-toolbar class="toolbar">
+
+  <!---->
+
+    <button mat-button [matMenuTriggerFor]="tools"><mat-icon>menu</mat-icon></button>
+    <mat-menu #tools="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="powerTools">Power Tools</button>
+      <button mat-menu-item [matMenuTriggerFor]="accesories">Accessories</button>
+      <button mat-menu-item [matMenuTriggerFor]="handTools">Hand Tools</button>
+    </mat-menu>
+    <!--POWER TOOLS-->
+    <mat-menu #powerTools="matMenu">
+      <!-- <button mat-menu-item [matMenuTriggerFor]="fish">Automotive Tools</button> -->
+      <button mat-menu-item >Automotive Tools</button>
+      <button mat-menu-item >Electrical Tools</button>
+      <button mat-menu-item >Compresors</button>
+      <button mat-menu-item>Drills</button>
+      <button mat-menu-item>Dust Management</button>
+    </mat-menu>
+
+
+<!--     <mat-menu #fish="matMenu">
+      <button mat-menu-item>Baikal oilfish</button>
+      <button mat-menu-item>Bala shark</button>
+      <button mat-menu-item>Ballan wrasse</button>
+      <button mat-menu-item>Bamboo shark</button>
+      <button mat-menu-item>Banded killifish</button>
+    </mat-menu> -->
+
+    <!--ACCESSORIES-->
+    <mat-menu #accesories="matMenu">
+      <button mat-menu-item >ELITE SERIES™ Accessories</button>
+      <button mat-menu-item >IMPACT CONNECT™ Attachments</button>
+      <button mat-menu-item >Batteries & Chargers</button>
+      <button mat-menu-item>Cutting & Grinding Accessories</button>
+      <button mat-menu-item>Drilling Accessories</button>
+    </mat-menu>
+
+    <!--ACCESSORIES-->
+    <mat-menu #handTools="matMenu">
+      <button mat-menu-item >TOUGHSERIES™ Hand Tools</button>
+      <button mat-menu-item >Chisels, Punches, & Files</button>
+      <button mat-menu-item >Clamps & Vises</button>
+      <button mat-menu-item>Drywall Tools</button>
+      <button mat-menu-item>Hammers</button>
+    </mat-menu>
+  <!---->
+<!--   <button mat-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>Power Tools</button>
+    <button mat-menu-item>Accessories</button>
+    <button mat-menu-item>Hand Tools</button>
+    <button mat-menu-item>Outdoor</button>
+    <button mat-menu-item>Protective Workwear</button>
+    <button mat-menu-item>Storage</button>
+    <button mat-menu-item>Workspace</button>
+    <button mat-menu-item>Anchor & Fasteners</button>
+
+
+  </mat-menu> -->
+    <span>Tools</span>
+    <span class="example-spacer"></span>
+
+
+      <!-- <input matInput placeholder="Hammer" required> -->
+      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="openDialog()">
+        <mat-icon>photo_camera</mat-icon>
+      </button>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>search</mat-icon>
+    </button>
+
+    <div class="cart">
+     <!--  <a href=""> -->
+      <button mat-button (click)="openCart()">
+        <img src="./assets/svg/icon_shopping_cart.svg" alt="logo">
+        <span class="counter">{{ counter }}</span>
+      </button>
+      <!-- </a> -->
+
+    </div>
+
+    <button mat-icon-button class="example-icon" (click)="logOut()"
+            #tooltip="matTooltip"
+            matTooltip="Cerrar Sesion"
+            matTooltipHideDelay="100">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar>
+
+
+  <div class="product-detail" [class.active]="showProductDetail">
+     <div *ngIf="productChosen">
+       <button (click)="toggleProductDetail()"><mat-icon>close</mat-icon></button>
+       <br>
+       <h1 style="width: 100%; margin-left: 20%;">{{ title }}</h1>
+        <br>
+        <h1 *ngIf="emptyCart">Su carrito está actualmente vacío.</h1>
+        <div class="img-detail">
+       <app-producto
+       [myProduct]="p"
+       *ngFor="let p of productsCart"
+       [showButton]="false"
+       >
+     <!--   (addedProduct)="onAddToShoppingCart($event)"
+       (showProduct)="onShowDetail($event)" -->
+       </app-producto>
+       </div>
+
+     </div>
+
+    <div class="footer" *ngIf="!emptyCart">
+      <div class="row justify-content-center" style="width: 80%; margin-left: 10%;">
+        <!-- <button mat-raised-button (click)="onClearCart()">Limpiar carrito</button> -->
+        <button mat-raised-button (click)="onCheckout()">Pagar</button>
+      </div>
+      <br>
+      <h1 >{{"Total " + total}}</h1>
+    </div>
+   </div>

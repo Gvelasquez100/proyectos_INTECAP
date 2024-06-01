@@ -1,0 +1,38 @@
+
+<div class="container contenedor">
+  <div class="row justify-content-center">
+    <mat-card>
+      <div class="row justify-content-center">
+        <h3>Image Analysis</h3>
+      </div>
+      <br>
+      <mat-card-content>
+
+        <!--<img src="./assets/images/sample.jpg" class="img-thumbnail" alt="image" width="100%" height="40%" >-->
+        <img [src]="imagenSeleccionada" class="img-thumbnail" alt="image" width="100%" height="30%" *ngIf="seleccionoImg">
+        <br>
+        <div class="row">
+          <div class="row rowUpload">
+            <input type="file" #fileInput style="display:none"  (change)="onFileSelected($event)" accept="application/jpg"  class="btnsCenter">
+            <button mat-raised-button   (click)="fileInput.click()" class="btnsCenter"> <mat-icon>attach_file</mat-icon> Seleccionar archivos</button>
+          </div>
+        </div>
+        <br>
+        <mat-form-field style="width: 100%;">
+          <mat-label></mat-label>
+          <textarea matInput>{{resultadoAnalisis}}</textarea>
+        </mat-form-field>
+      </mat-card-content>
+
+      <script async src="https://cse.google.com/cse.js?cx=67cce59f950e34601">
+      </script>
+      <div class="gcse-search"></div>
+
+      <div class="row justify-content-center">
+        <button mat-raised-button color="primary" style="width: 200px; height: 40px;" (click)="analizarImg()">ANALIZAR</button>
+
+      </div>
+      <br>
+      </mat-card>
+  </div>
+</div>

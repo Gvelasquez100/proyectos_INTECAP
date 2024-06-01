@@ -1,0 +1,51 @@
+
+<mat-dialog-content>
+<div class="container">
+
+  <div class="row rowTitle">
+    <h3>BUSQUEDA POR IMAGENES...</h3>
+
+</div>
+
+</div>
+<br>
+
+<img [src]="imagenSeleccionada" class="img-thumbnail" alt="image" width="100%" height="30%" *ngIf="seleccionoImg">
+<br>
+<br>
+<div class="row">
+<!--   <input type="file" accept="image/jpeg,application/pdf" />
+  <input type="file" accept=".jpeg,.pdf" /> -->
+    <input type="file" #fileInput style="display:none"  (change)="onFileSelected($event)" accept="application/jpg"  class="btnsCenter">
+    <br>
+    <br>
+    <button mat-raised-button   (click)="fileInput.click()" > <mat-icon>attach_file</mat-icon> Seleccionar archivos</button>
+
+</div>
+<br>
+
+<div class="products--grid">
+  <app-producto
+  [myProduct]="p"
+  *ngFor="let p of products"
+  (addedProduct)="onAddToShoppingCart($event)"
+  (showProduct)="onShowDetail($event)"
+  [showButton]="true"
+  >
+<!--   (addedProduct)="onAddToShoppingCart($event)"
+  (showProduct)="onShowDetail($event)" -->
+  </app-producto>
+  <!-- <button mat-raised-button color="primary"
+   (click)="loadMore()">Load More</button> -->
+</div>
+<br>
+<br>
+<div class="row justify-content-center">
+  <button mat-button  style="width: 200px; height: 40px;" (click)="analizarImg()">BUSCAR</button>
+</div>
+
+</mat-dialog-content>
+<br>
+<mat-dialog-actions align="end">
+  <button mat-button  [mat-dialog-close]="true" cdkFocusInitial>CERRAR</button>
+</mat-dialog-actions>

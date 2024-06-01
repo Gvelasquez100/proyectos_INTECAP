@@ -1,0 +1,23 @@
+p,h2{
+  margin: 0;
+}
+
+button {
+  border-radius: 10px;
+  background-color: #febd17;
+}
+
+button:hover {
+  color: #febd17;
+  background-color: #ffffff;
+}
+
+button:active {
+  background-color: #ffb700;
+  color: #000000;
+}
+
+button:disabled {
+  background-color: #FFFFFF;
+  color: #B2B2B2;
+}

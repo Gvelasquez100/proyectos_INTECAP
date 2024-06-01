@@ -1,0 +1,180 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.toolbar{
+  background-color: #febd17;
+  color: black;
+}
+
+button {
+  background-color: #febd17;
+  //color: black;
+}
+
+.product-detail {
+  position: fixed;
+  top: 0;
+  left: 5%;
+  bottom: 0;
+  right: 0;
+  background: #febd17;
+  display: flex;
+  //flex-direction: column;
+  //justify-content: flex-start;
+  transition: all ease-out .5s;
+  transform: translateX(100%);
+  z-index: 9999; /* Ajusta el valor según sea necesario para asegurar que esté por encima del mat-dialog */
+
+  &.active {
+    transform: translateX(0);
+
+    .img-detail{
+      overflow-y: auto;
+      max-height: 400px;
+      width: 400px;
+      background: #febd17;
+     }
+
+  }
+}
+
+.product-detail.active {
+  transform: translateX(0);
+}
+
+.product-detail .content {
+  position: relative; /* Establece el contenido como un elemento de posición relativa */
+  width: 100%; /* Ajusta el ancho según sea necesario */
+}
+
+.product-detail .footer {
+  position: absolute; /* Establece el pie como un elemento de posición absoluta */
+  bottom: 0; /* Lo posiciona en la parte inferior */
+  width: 100%; /* Ajusta el ancho según sea necesario */
+}
+
+.product-detail .footer h1 {
+  margin: 0; /* Elimina el margen para que esté pegado al borde inferior */
+}
+
+
+button {
+  border-radius: 10px;
+  background-color: #febd17;
+}
+
+button:hover {
+  color: #febd17;
+  background-color: #ffffff;
+}
+
+button:active {
+  background-color: #ffb700;
+  color: #000000;
+}
+
+button:disabled {
+  background-color: #FFFFFF;
+  color: #B2B2B2;
+}
+
+.show-mobile {
+  display: block;
+  box-shadow: 0px 2px 5px rgb(black, .2);
+  > div {
+    padding: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    button {
+      border: 0;
+      background: transparent;
+    }
+  }
+  .side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transform: translateX(-100%);
+    transition: all ease-out .5s;
+    &.active {
+      transform: translateX(0);
+    }
+  }
+}
+.hide-mobile {
+  display: none;
+  box-shadow: 0px 2px 5px rgb(black, .2);
+  > div {
+    padding: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    margin-right: 1em;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    ul {
+      display: flex;
+      list-style: none;
+      a {
+        margin: 0 .2em;
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  }
+  .info {
+    display: flex;
+    align-items: center;
+    .account {
+      margin-right: .5em;
+    }
+    .cart {
+      position: relative;
+      .counter {
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        background: #ACD9B2;
+        border-radius: 50%;
+        display: block;
+        color: white;
+        text-align: center;
+        position: absolute;
+        top: -10px;
+        right: -10px;
+      }
+    }
+  }
+}
+
+/* Medium only */
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {
+  .show-mobile {
+    display: none;
+  }
+  .hide-mobile {
+    display: block;
+  }
+}
+
+/* Large and up */
+@media screen and (min-width: 64em) {
+  .show-mobile {
+    display: none;
+  }
+  .hide-mobile {
+    display: block;
+  }
+}
